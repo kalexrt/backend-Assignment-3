@@ -1,4 +1,7 @@
 import { getUserQuery, User } from "../interfaces/user.interface";
+import loggerWithNameSpace from "../utils/logger";
+
+const logger = loggerWithNameSpace("UserModel")
 
 let users: User[] = [ 
   {
@@ -17,18 +20,24 @@ let users: User[] = [
   },
 ];
 
+//return user by id
 export function getUserById(id: string) {
+  logger.info("Called getUserById")
   return users.find(({ id: userId }) => userId === id);
 }
 
+//create users
 export function createUser(user: User) {
+  logger.info("Called createUser")
   return users.push({
     ...user,
     id: `${users.length + 1}`,
   });
 }
 
+//get all users
 export function getUsers(query: getUserQuery) {
+  logger.info("Called getUsers")
   const { q } = query;
   if (q) {
     return users.filter(({ name }) => name.includes(q));
@@ -36,16 +45,22 @@ export function getUsers(query: getUserQuery) {
   return users;
 }
 
+//return user by email
 export function getUserByEmail(email: string) {
+  logger.info("Called getUsersByEmail")
   return users.find(({ email: userEmail }) => userEmail === email);
 }
 
+//delete the user by the id
 export function deleteUserById(id:number){
+  logger.info("Called deleteUserById")
   users = users.filter(user => parseInt(user.id) !== id);
   return {message: `user${id} is delted`}
 }
 
+//update the user from the given Id
 export function updateUserById(id: string, updatedUserData: Partial<User>): User {
+  logger.info("Called updateUserById")
   const userIndex = users.findIndex(user => user.id === id);
   if (userIndex === -1) {
     throw new Error("User not found");

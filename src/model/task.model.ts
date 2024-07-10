@@ -1,5 +1,8 @@
 import { ITask } from "../interfaces/ITask.interface";
 import { STATUS } from "../interfaces/status.interface";
+import loggerWithNameSpace from "../utils/logger";
+
+const logger = loggerWithNameSpace("TaskModel")
 
 export let db: ITask[] = [
   {
@@ -24,6 +27,7 @@ export let db: ITask[] = [
 
 //find task
 function findTask(searchId: number, userId: number) {
+  logger.info("Called FindTask")
   return (
     db.findIndex((task) => task.id === searchId && task.userId === userId) ||
     null
@@ -32,16 +36,19 @@ function findTask(searchId: number, userId: number) {
 
 //validate task
 function isTaskInvalid(task: ITask) {
+  logger.info("Called isTaskInvalid")
   return !task.id || !task.name || task.status === undefined || !task.userId;
 }
 
 //get all tasks
 export function getTasksFromDB(userId: number) {
+  logger.info("Called getTasksFromDB")
   return db.filter((task) => task.userId === userId);
 }
 
 //get task from id
 export function getTaskByIdFromDB(taskId: number, userId: number) {
+  logger.info("Called getTaskByIdFromDB")
   const index = findTask(taskId, userId);
   if (index !== null) {
     return db[index];
@@ -52,6 +59,7 @@ export function getTaskByIdFromDB(taskId: number, userId: number) {
 
 //delete task
 export function deleteTaskByIdFromDB(idToBeDeleted: number, userId: number) {
+  logger.info("Called deleteTaskByIdFromDB")
   const index = findTask(idToBeDeleted, userId);
   if (index !== null) {
     db.splice(index, 1); //remove task
@@ -62,6 +70,7 @@ export function deleteTaskByIdFromDB(idToBeDeleted: number, userId: number) {
 
 //create task
 export function createTaskInDB(task: ITask) {
+  logger.info("Called createTaskInDB")
   if (isTaskInvalid(task)) {
     throw new Error("Invalid task data");
   }
@@ -74,6 +83,7 @@ export function updateTaskInDB(
   updatedTask: ITask,
   userId: number
 ) {
+  logger.info("Called updateTaskInDB")
   const index = findTask(taskId, userId);
   if (index !== null) {
     //check index
@@ -89,6 +99,7 @@ export function updateTaskInDB(
 
 //delete all tasks by user id
 export function deleteAllTasksByUserId(userId: number) {
+  logger.info("Called deleteAlltasksByUserId")
   const initialLength = db.length;
   db = db.filter((task) => task.userId !== userId);
   const deletedCount = initialLength - db.length; //find number of delted tasks

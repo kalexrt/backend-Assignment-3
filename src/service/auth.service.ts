@@ -5,10 +5,14 @@ import { User } from "../interfaces/user.interface";
 import { getUserByEmail } from "./user.service";
 import { sign, verify } from "jsonwebtoken";
 import config from "../config";
+import loggerWithNameSpace from "../utils/logger";
+
+const logger = loggerWithNameSpace ("AuthService");
 
 export async function login(body: Pick<User, "email" | "password">) {
-  const existingUser = getUserByEmail(body.email);
 
+  logger.info("Called login")
+  const existingUser = getUserByEmail(body.email);
   if (!existingUser) {
     return {
       error: "Invalid email or password",
@@ -47,6 +51,7 @@ export async function login(body: Pick<User, "email" | "password">) {
 }
 
 export async function refresh(refreshToken: string) {
+  logger.info("Called refresh")
   const decoded = await verify(refreshToken, config.jwt.secret!);
   const { id, name, email } = decoded as User;
 
