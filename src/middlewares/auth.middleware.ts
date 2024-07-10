@@ -37,5 +37,7 @@ export function authorize(permission: string){
     if(!user.permissions.includes(permission)) {
       next(new UnauthenticatedError("Forbidden"));
     }
+
+    next();
   }
 }

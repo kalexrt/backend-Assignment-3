@@ -6,6 +6,6 @@ export interface User {
   permissions:string[];
 }
 
-export interface GetUserQuery {
+export interface getUserQuery {
   q?: string;
 }

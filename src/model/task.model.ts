@@ -1,30 +1,33 @@
 import { ITask } from "../interfaces/ITask.interface";
 import { STATUS } from "../interfaces/status.interface";
 
-export const db: ITask[] = [
+export let db: ITask[] = [
   {
     id: 1,
     name: "walk the dog",
     status: STATUS.TODO,
-    userId: 1
+    userId: 1,
   },
   {
     id: 2,
     name: "feed the cat",
     status: STATUS.TODO,
-    userId: 1
+    userId: 1,
   },
   {
-    id: 3,
+    id: 1,
     name: "assignment 1",
     status: STATUS.TODO,
-    userId: 2
+    userId: 2,
   },
 ];
 
 //find task
 function findTask(searchId: number, userId: number) {
-  return db.findIndex(task => task.id === searchId && task.userId === userId) || null;
+  return (
+    db.findIndex((task) => task.id === searchId && task.userId === userId) ||
+    null
+  );
 }
 
 //validate task
@@ -34,7 +37,7 @@ function isTaskInvalid(task: ITask) {
 
 //get all tasks
 export function getTasksFromDB(userId: number) {
-  return db.filter(task => task.userId === userId);
+  return db.filter((task) => task.userId === userId);
 }
 
 //get task from id
@@ -66,14 +69,28 @@ export function createTaskInDB(task: ITask) {
 }
 
 //update task
-export function updateTaskInDB(taskId: number, updatedTask: ITask, userId: number) {
+export function updateTaskInDB(
+  taskId: number,
+  updatedTask: ITask,
+  userId: number
+) {
   const index = findTask(taskId, userId);
-  if (index !== null) { //check index
-    if (isTaskInvalid(updatedTask)) { //check task
+  if (index !== null) {
+    //check index
+    if (isTaskInvalid(updatedTask)) {
+      //check task
       throw new Error("Invalid task data");
     }
     db[index] = updatedTask; //update task
   } else {
     throw new Error("Task not found");
   }
+}
+
+//delete all tasks by user id
+export function deleteAllTasksByUserId(userId: number) {
+  const initialLength = db.length;
+  db = db.filter((task) => task.userId !== userId);
+  const deletedCount = initialLength - db.length; //find number of delted tasks
+  return { message: `${deletedCount} task(s) deleted for user ID ${userId}` }; //return message
 }

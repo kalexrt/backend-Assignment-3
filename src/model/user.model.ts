@@ -1,19 +1,19 @@
-import { GetUserQuery, User } from "../interfaces/user.interface";
+import { getUserQuery, User } from "../interfaces/user.interface";
 
-const users: User[] = [ 
+let users: User[] = [ 
   {
     id: "1",
     name: "Kalash",
     email: "kalash1@gmail.com",
     password: "$2b$10$I24gdNea7i6fSXPl1uy96.cle9N5v6Zt8HyZTkTpFhD.kwzHeBHNW",
-    permissions:["users.get"],
+    permissions:["users.getAll","users.create","users.getById","users.updateById","users.deleteById"],
   },
   {
     id: "2",
     name: "Kalash",
     email: "kalash2@gmail.com",
     password: "$2b$10$I24gdNea7i6fSXPl1uy96.cle9N5v6Zt8HyZTkTpFhD.kwzHeBHNW",
-    permissions:["users.get"],
+    permissions:[],
   },
 ];
 
@@ -28,7 +28,7 @@ export function createUser(user: User) {
   });
 }
 
-export function getUsers(query: GetUserQuery) {
+export function getUsers(query: getUserQuery) {
   const { q } = query;
   if (q) {
     return users.filter(({ name }) => name.includes(q));
@@ -38,4 +38,9 @@ export function getUsers(query: GetUserQuery) {
 
 export function getUserByEmail(email: string) {
   return users.find(({ email: userEmail }) => userEmail === email);
+}
+
+export function deleteUserById(id:number){
+  users = users.filter(user => parseInt(user.id) !== id);
+  return {message: `user${id} is delted`}
 }

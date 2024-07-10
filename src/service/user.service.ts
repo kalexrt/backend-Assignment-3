@@ -1,10 +1,11 @@
 import bcrypt from "bcrypt";
 
-import { GetUserQuery, User } from "../interfaces/user.interface";
-import * as UserModel from "../model/user.model";
+import { getUserQuery, User } from "../interfaces/user.interface";
+import * as taskModel from "../model/task.model"
+import * as userModel from "../model/user.model";
 
 export function getUserById(id: string) {
-  const data = UserModel.getUserById(id);
+  const data = userModel.getUserById(id);
 
   if (!data) {
     return {
@@ -18,18 +19,27 @@ export function getUserById(id: string) {
 export async function createUser(user: User) {
   const password = await bcrypt.hash(user.password, 10);
 
-  UserModel.createUser({
+  userModel.createUser({
     ...user,
     password,
   });
 }
 
-export function getUsers(query: GetUserQuery) {
-  return UserModel.getUsers(query);
+export function getUsers(query: getUserQuery) {
+  return userModel.getUsers(query);
 }
 
 export function getUserByEmail(email: string) {
-  const data = UserModel.getUserByEmail(email);
-
+  const data = userModel.getUserByEmail(email);
   return data;
+}
+
+export function deleteUserById(id:number){
+  const taskDeletionResult = taskModel.deleteAllTasksByUserId(id); //delete all user tasks
+  const userDeletionResult = userModel.deleteUserById(id); //delete user
+  
+  return {
+    taskDeletionResult,
+    userDeletionResult,
+  };
 }
