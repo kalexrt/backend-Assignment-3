@@ -1,5 +1,5 @@
 import { NextFunction,Response } from "express";
-import { Request } from "../interfaces/auth";
+import { Request } from "../interfaces/auth.interface";
 import loggerWithNameSpace from "../utils/logger";
 
 

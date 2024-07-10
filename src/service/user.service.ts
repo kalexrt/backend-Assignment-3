@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 
-import { GetUserQuery, User } from "../interfaces/user";
-import * as UserModel from "../model/user";
+import { GetUserQuery, User } from "../interfaces/user.interface";
+import * as UserModel from "../model/user.model";
 
 export function getUserById(id: string) {
   const data = UserModel.getUserById(id);

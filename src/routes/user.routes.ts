@@ -1,8 +1,8 @@
 import express from "express";
 
-import { authenticate, authorize } from "../middlewares/auth";
+import { authenticate, authorize } from "../middlewares/auth.middleware";
 
-import { createUser, getUserById, getUsers } from "../controller/user";
+import { createUser, getUserById, getUsers } from "../controller/user.controller";
 
 const router = express();
 

@@ -1,8 +1,8 @@
 import bcrypt from "bcrypt";
 
-import { User } from "../interfaces/user";
+import { User } from "../interfaces/user.interface";
 
-import { getUserByEmail } from "./user";
+import { getUserByEmail } from "./user.service";
 import { sign, verify } from "jsonwebtoken";
 import config from "../config";
 

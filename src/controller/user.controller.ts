@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
-import * as UserService from "../service/user";
-import { GetUserQuery } from "../interfaces/user";
+import * as UserService from "../service/user.service";
+import { GetUserQuery } from "../interfaces/user.interface";
 import HttpStatusCodes from "http-status-codes";
 import loggerWithNameSpace from "../utils/logger";
 

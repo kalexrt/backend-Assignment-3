@@ -2,8 +2,8 @@ import { NextFunction, Response } from "express";
 import { verify } from "jsonwebtoken";
 
 import config from "../config";
-import { User } from "../interfaces/user";
-import { Request } from "../interfaces/auth";
+import { User } from "../interfaces/user.interface";
+import { Request } from "../interfaces/auth.interface";
 import { UnauthenticatedError } from "../error/UnauthenticatedError";
 
 export function authenticate(req: Request, res: Response, next: NextFunction) {

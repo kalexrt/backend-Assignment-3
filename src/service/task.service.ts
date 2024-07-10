@@ -4,8 +4,8 @@ import {
   getTaskByIdFromDB,
   getTasksFromDB,
   updateTaskInDB,
-} from "../model/task";
-import { ITask } from "../interfaces/ITask";
+} from "../model/task.model";
+import { ITask } from "../interfaces/ITask.interface";
 
 //get tasks
 export function getTasks() {

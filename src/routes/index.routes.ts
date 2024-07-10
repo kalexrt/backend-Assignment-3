@@ -1,7 +1,7 @@
 import express from "express";
-import taskRouter from "./task";
-import userRouter from "./user";
-import authRouter from "./auth"
+import taskRouter from "./task.routes";
+import userRouter from "./user.routes";
+import authRouter from "./auth.routes"
 
 const router = express();
 router.use("/tasks", taskRouter);

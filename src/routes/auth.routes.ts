@@ -1,6 +1,6 @@
 import express from "express";
-import { login } from "../controller/auth";
-import { refresh } from "../controller/auth";
+import { login } from "../controller/auth.controller";
+import { refresh } from "../controller/auth.controller";
 
 const router = express();
 

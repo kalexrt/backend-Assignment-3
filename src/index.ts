@@ -1,8 +1,8 @@
 import express from "express";
 import config from "./config";
-import router from "./routes";
-import { genericErrorHandler, notFoundError } from "./middlewares/errorHandler";
-import { requestLogger } from "./middlewares/logger";
+import router from "./routes/index.routes";
+import { genericErrorHandler, notFoundError } from "./middlewares/errorHandler.middleware";
+import { requestLogger } from "./middlewares/logger.middleware";
 
 const app = express();
 

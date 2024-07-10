@@ -1,5 +1,5 @@
-import { ITask } from "../interfaces/ITask";
-import { STATUS } from "../interfaces/status";
+import { ITask } from "../interfaces/ITask.interface";
+import { STATUS } from "../interfaces/status.interface";
 
 export const db: ITask[] = [
   {

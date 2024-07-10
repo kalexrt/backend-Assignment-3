@@ -1,4 +1,4 @@
-import { GetUserQuery, User } from "../interfaces/user";
+import { GetUserQuery, User } from "../interfaces/user.interface";
 
 const users: User[] = [ 
   {

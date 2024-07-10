@@ -5,7 +5,7 @@ import {
   createTask,
   getTaskById,
   updateTaskById
-} from "../controller/task";
+} from "../controller/task.controller";
 
 
 const router = express();

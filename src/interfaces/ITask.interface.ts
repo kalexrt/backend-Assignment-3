@@ -1,4 +1,4 @@
-import { STATUS } from "./status"
+import { STATUS } from "./status.interface"
 export interface ITask{
     id:number,
     name:string,

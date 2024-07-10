@@ -1,5 +1,5 @@
 import { NextFunction, Response } from "express";
-import { Request } from "../interfaces/auth";
+import { Request } from "../interfaces/auth.interface";
 import HttpStatusCodes from "http-status-codes";
 import { UnauthenticatedError } from "../error/UnauthenticatedError";
 import loggerWithNameSpace from "../utils/logger";
