@@ -3,6 +3,7 @@ import { Request } from "../interfaces/auth.interface";
 import HttpStatusCodes from "http-status-codes";
 import { UnauthenticatedError } from "../error/UnauthenticatedError";
 import loggerWithNameSpace from "../utils/logger";
+import { ServerError } from "../error/ServerError";
 
 const logger = loggerWithNameSpace("ErrorHandler");
 
@@ -26,8 +27,13 @@ export function genericErrorHandler(
     return res.status(HttpStatusCodes.UNAUTHORIZED).json({
       message: error.message,
     });
+  }else if(error instanceof ServerError){
+    return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: error.message,
+    })
   }
   return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({
     message: "Internal Server Error",
   });
 }
+

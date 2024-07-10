@@ -17,7 +17,7 @@ export function authenticate(req: Request, res: Response, next: NextFunction) {
   const token = authorization.split(" ");
 
   if (token.length !== 2 || token[0] !== "Bearer") {
-    next(new UnauthenticatedError("Unauthenticated"));
+    next(new UnauthenticatedError("Improper Token Format"));
     return;
   }
 
@@ -26,7 +26,7 @@ export function authenticate(req: Request, res: Response, next: NextFunction) {
     req.user = user;
     next();
   }catch(e){
-    throw new UnauthenticatedError("Unauthenticated");
+    throw new UnauthenticatedError("Expired or Unexisting Token");
   }
 }
 
