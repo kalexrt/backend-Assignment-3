@@ -44,3 +44,14 @@ export function deleteUserById(id:number){
   users = users.filter(user => parseInt(user.id) !== id);
   return {message: `user${id} is delted`}
 }
+
+export function updateUserById(id: string, updatedUserData: Partial<User>): User {
+  const userIndex = users.findIndex(user => user.id === id);
+  if (userIndex === -1) {
+    throw new Error("User not found");
+  }
+  //update user data
+  users[userIndex] = { ...users[userIndex], ...updatedUserData };
+
+  return users[userIndex];
+}

@@ -43,3 +43,7 @@ export function deleteUserById(id:number){
     userDeletionResult,
   };
 }
+
+export function updateUserById(id: number, updatedUserData: Partial<User>): User {
+  return userModel.updateUserById(String(id), updatedUserData);
+}

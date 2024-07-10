@@ -33,8 +33,16 @@ export async function createUser(req: Request, res: Response) {
   });
 }
 
-export function updateUserById(req: Request, res: Response){
-  
+export function updateUserById(req: Request, res: Response) {
+  try {
+    const id = parseInt(req.params.id);
+    const updatedUserData = req.body;
+    const updatedUser = userService.updateUserById(id, updatedUserData);
+    res.json({ message: "User updated", data: updatedUser });
+  } catch (error) {
+    const err = error as Error;
+    res.status(500).json({ message: err.message });
+  }
 }
 
 export function deleteUserById(req: Request, res: Response){
