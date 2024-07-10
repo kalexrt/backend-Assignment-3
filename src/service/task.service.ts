@@ -8,26 +8,27 @@ import {
 import { ITask } from "../interfaces/ITask.interface";
 
 //get tasks
-export function getTasks() {
-  return getTasksFromDB();
+export function getTasks(userId: number) {
+  return getTasksFromDB(userId);
 }
 
 //get task by id
-export function getTaskById(id: number) {
-  getTaskByIdFromDB(id);
+export function getTaskById(id: number, userId: number) {
+  return getTaskByIdFromDB(id, userId);
 }
 
 //delete task
-export function deleteTaskById(id: number) {
-  deleteTaskByIdFromDB(id);
+export function deleteTaskById(id: number, userId: number) {
+  deleteTaskByIdFromDB(id, userId);
 }
 
 //create task
-export function createTask(task: ITask) {
-  createTaskInDB(task);
+export function createTask(task: ITask, userId: number) {
+  const taskWithUserId = { ...task, userId }; //add userId to the task
+  createTaskInDB(taskWithUserId);
 }
 
 //update task
-export function updateTaskById(id: number, task: ITask) {
-  updateTaskInDB(id, task);
+export function updateTaskById(id: number, task: ITask, userId: number) {
+  updateTaskInDB(id, task, userId);
 }

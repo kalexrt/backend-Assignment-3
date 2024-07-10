@@ -4,7 +4,14 @@ const users: User[] = [
   {
     id: "1",
     name: "Kalash",
-    email: "kalash@gmail.com",
+    email: "kalash1@gmail.com",
+    password: "$2b$10$I24gdNea7i6fSXPl1uy96.cle9N5v6Zt8HyZTkTpFhD.kwzHeBHNW",
+    permissions:["users.get"],
+  },
+  {
+    id: "2",
+    name: "Kalash",
+    email: "kalash2@gmail.com",
     password: "$2b$10$I24gdNea7i6fSXPl1uy96.cle9N5v6Zt8HyZTkTpFhD.kwzHeBHNW",
     permissions:["users.get"],
   },

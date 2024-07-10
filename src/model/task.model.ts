@@ -6,32 +6,40 @@ export const db: ITask[] = [
     id: 1,
     name: "walk the dog",
     status: STATUS.TODO,
+    userId: 1
   },
   {
     id: 2,
     name: "feed the cat",
     status: STATUS.TODO,
+    userId: 1
+  },
+  {
+    id: 3,
+    name: "assignment 1",
+    status: STATUS.TODO,
+    userId: 2
   },
 ];
 
 //find task
-function findTask(searchId: number) {
-  return db.findIndex(task => task.id === searchId) || null;
+function findTask(searchId: number, userId: number) {
+  return db.findIndex(task => task.id === searchId && task.userId === userId) || null;
 }
 
 //validate task
-function isTaskInvalid(task:ITask) {
-  return !task.id || !task.name || task.status === undefined;
+function isTaskInvalid(task: ITask) {
+  return !task.id || !task.name || task.status === undefined || !task.userId;
 }
 
 //get all tasks
-export function getTasksFromDB() {
-  return db;
+export function getTasksFromDB(userId: number) {
+  return db.filter(task => task.userId === userId);
 }
 
 //get task from id
-export function getTaskByIdFromDB(taskId: number) {
-  const index = findTask(taskId);
+export function getTaskByIdFromDB(taskId: number, userId: number) {
+  const index = findTask(taskId, userId);
   if (index !== null) {
     return db[index];
   } else {
@@ -40,8 +48,8 @@ export function getTaskByIdFromDB(taskId: number) {
 }
 
 //delete task
-export function deleteTaskByIdFromDB(idToBeDeleted: number) {
-  const index = findTask(idToBeDeleted);
+export function deleteTaskByIdFromDB(idToBeDeleted: number, userId: number) {
+  const index = findTask(idToBeDeleted, userId);
   if (index !== null) {
     db.splice(index, 1); //remove task
   } else {
@@ -58,10 +66,10 @@ export function createTaskInDB(task: ITask) {
 }
 
 //update task
-export function updateTaskInDB(taskId: number, updatedTask: ITask) {
-  const index = findTask(taskId);
+export function updateTaskInDB(taskId: number, updatedTask: ITask, userId: number) {
+  const index = findTask(taskId, userId);
   if (index !== null) { //check index
-    if (isTaskInvalid(updatedTask)) { //ccheck task
+    if (isTaskInvalid(updatedTask)) { //check task
       throw new Error("Invalid task data");
     }
     db[index] = updatedTask; //update task
