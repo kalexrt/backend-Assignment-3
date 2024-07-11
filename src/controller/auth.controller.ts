@@ -3,6 +3,7 @@ import * as authService from "../service/auth.service";
 import HttpStatusCodes from "http-status-codes";
 import loggerWithNameSpace from "../utils/logger";
 import { ServerError } from "../error/ServerError";
+import { ClientError } from "../error/ClientError";
 
 const logger =  loggerWithNameSpace("AuthController")
 
@@ -13,7 +14,11 @@ export async function login(req: Request, res: Response, next: NextFunction) {
     const data = await authService.login(body);
     res.status(HttpStatusCodes.OK).json(data);
   } catch ( error) {
-    next(new ServerError("Login Failed"));
+    if( error instanceof ClientError){
+      next(error);
+    }else{ 
+      next(new ServerError("Login Failed"));
+    }
   }
 }
 
