@@ -31,7 +31,7 @@ Create .env file with the help of .env.example to configure the port
 ### Run the server
 
 ```bash
-docker run -p <PORT>:<PORT> --env-file=<path_to_env> kalexrt/usertodo:0.1.0
+docker run -p <PORT>:<PORT> --env-file=<path_to_env> kalexrt/todowitherror:0.1.1
 ```
 
 ### Routes
